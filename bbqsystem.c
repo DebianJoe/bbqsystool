@@ -12,9 +12,14 @@ int main (int argc, char *argv[])
     noecho();
 
     char intro[]="BBQ System Tweak Tool\n";
+    char opt1[]="Selection1";
+    char opt2[]="Selection2\n";
+    int left_third = (col-strlen(opt1))/3;
+    int right_third = (col-strlen(opt2))/1.5;
 
     mvprintw(0, (col-strlen(intro))/2, "%s",intro); 
-    printw("First, let's check choices.\n");
+    mvprintw(1,left_third, "%s",opt1);
+    mvprintw(1,right_third, "%s", opt2);
     ch = getch();   //this is why we call raw(), to not have
                     //have to press "return" after every 
                     //keypress
