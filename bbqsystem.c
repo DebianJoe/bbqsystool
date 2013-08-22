@@ -10,9 +10,9 @@ int starty = 0;
 
 char *choices[] = { 
 			"BBQ CPU",
-			"Choice 2",
-			"Choice 3",
-			"Choice 4",
+			"BBQ WTF",
+			"BBQ Mem",
+			"BBQ Screen",
 			"Exit",
 		  };
 int n_choices = sizeof(choices) / sizeof(char *);
@@ -68,6 +68,10 @@ int main()
 			break;
 	}	
 	mvprintw(20, 0, "You chose choice %d with choice string %s\n", choice, choices[choice - 1]);
+	if(choice == 5){
+		endwin();
+		exit(1);
+	}
 	clrtoeol();
 	refresh();
 	getch();
