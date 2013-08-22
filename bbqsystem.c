@@ -19,7 +19,8 @@ int n_choices = sizeof(choices) / sizeof(char *);
 void print_menu(WINDOW *menu_win, int highlight);
 
 int main()
-{	WINDOW *menu_win;
+{	
+	WINDOW *menu_win;
 	int highlight = 1;
 	int choice = 0;
 	int c;
@@ -40,10 +41,10 @@ int main()
 	mvprintw(3, 4, " Press enter to select a choice");
 	refresh();
 	print_menu(menu_win, highlight);
-	while(1)
-	{	c = wgetch(menu_win);
-		switch(c)
-		{	case KEY_UP:
+	while(1){
+		c = wgetch(menu_win);
+		switch(c){
+			case KEY_UP:
 				if(highlight == 1)
 					highlight = n_choices;
 				else
@@ -67,9 +68,10 @@ int main()
 		if(choice != 0)	/* User did a choice come out of the infinite loop */
 			break;
 	}	
-	mvprintw(20, 0, "You chose choice %d with choice string %s\n", choice, choices[choice - 1]);
-	if(choice == 5){
+	mvprintw(20, 0, "Choice number %d is choice string %s\n", choice, choices[choice - 1]);
+	if(choice == 5){	//clean exit, requires change if main menu has more items
 		endwin();
+		printf("\n\n\033[1;31mHappy roasting!\033[1;m\n\n");
 		exit(1);
 	}
 	clrtoeol();
@@ -87,9 +89,9 @@ void print_menu(WINDOW *menu_win, int highlight)
 	x = 2;
 	y = 2;
 	box(menu_win, 0, 0);
-	for(i = 0; i < n_choices; ++i)
-	{	if(highlight == i + 1) /* High light the present choice */
-		{	wattron(menu_win, A_REVERSE); 
+	for(i = 0; i < n_choices; ++i){	
+		if(highlight == i + 1){
+			wattron(menu_win, A_REVERSE); 
 			mvwprintw(menu_win, y, x, "%s", choices[i]);
 			wattroff(menu_win, A_REVERSE);
 		}
