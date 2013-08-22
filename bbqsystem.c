@@ -80,7 +80,8 @@ int main()
 			int mode;
 			def_prog_mode();
 			endwin();
-			printf("This is where the CPU choices will go.\n");
+			printf("\033[1;33mThis is where the CPU choices will go.\033[1;m\n");
+			printf("Press a number to go set value and go to menu.");			
 			scanf("%d", &mode);
 			printf("You chose %d\n", mode);
 			getch();
@@ -92,7 +93,8 @@ int main()
 			int mode;
 			def_prog_mode();
 			endwin();
-			printf("This is where the 2nd set of choices will go.\n");
+			printf("\033[1;33mThis is where the 2nd set of choices will go.\033[1;m\n");
+			printf("Press a number to go set value and go to menu.");
 			scanf("%d", &mode);
 			printf("You chose %d\n", mode);
 			getch();
@@ -103,7 +105,8 @@ int main()
 			int mode;
 			def_prog_mode();
 			endwin();
-			printf("This is where the 3rd set of choices will go.\n");
+			printf("\033[1;33mThis is where the 3rd set of choices will go.\033[1;m\n");
+			printf("Press a number to go set value and go to menu.");
 			scanf("%d", &mode);
 			printf("You chose %d\n", mode);
 			getch();
@@ -114,7 +117,8 @@ int main()
 			int mode;
 			def_prog_mode();
 			endwin();
-			printf("This is where the 4th set of choices will go.\n");
+			printf("\033[1;33mThis is where the 4th set of choices will go.\033[1;m\n");
+			printf("Press a number to go set value and go to menu.");
 			scanf("%d", &mode);
 			printf("You chose %d\n", mode);
 			getch();
