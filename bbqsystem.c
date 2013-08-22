@@ -1,82 +1,97 @@
-#include <ncurses.h>
 #include <stdio.h>
-#include <string.h>
+#include <ncurses.h>
 #include <stdlib.h>
 
-WINDOW *create_newwin(int height, int width, int starty, int startx);
-void destroy_win(WINDOW *local_win);
+#define WIDTH 30
+#define HEIGHT 10 
 
-int main (int argc, char *argv[]) //thinking about switches, perhaps colorless?
+int startx = 0;
+int starty = 0;
+
+char *choices[] = { 
+			"BBQ CPU",
+			"Choice 2",
+			"Choice 3",
+			"Choice 4",
+			"Exit",
+		  };
+int n_choices = sizeof(choices) / sizeof(char *);
+void print_menu(WINDOW *menu_win, int highlight);
+
+int main()
+{	WINDOW *menu_win;
+	int highlight = 1;
+	int choice = 0;
+	int c;
+
+	initscr();
+	clear();
+	noecho();
+	cbreak();	/* Line buffering disabled. pass on everything */
+	startx = (40 - WIDTH) / 2;
+	starty = (20 - HEIGHT) / 2;
+		
+	menu_win = newwin(HEIGHT, WIDTH, starty, startx);
+	keypad(menu_win, TRUE);
+	attron(A_BOLD);
+	mvprintw(0, 8, "BBQ System Tweak Tool");
+	attroff(A_BOLD);
+	mvprintw(2, 4, "Use arrow keys to go up and down");
+	mvprintw(3, 4, " Press enter to select a choice");
+	refresh();
+	print_menu(menu_win, highlight);
+	while(1)
+	{	c = wgetch(menu_win);
+		switch(c)
+		{	case KEY_UP:
+				if(highlight == 1)
+					highlight = n_choices;
+				else
+					--highlight;
+				break;
+			case KEY_DOWN:
+				if(highlight == n_choices)
+					highlight = 1;
+				else 
+					++highlight;
+				break;
+			case 10:
+				choice = highlight;
+				break;
+			default:
+				mvprintw(24, 0, "Charcter pressed is = %3d Hopefully it can be printed as '%c'", c, c);
+				refresh();
+				break;
+		}
+		print_menu(menu_win, highlight);
+		if(choice != 0)	/* User did a choice come out of the infinite loop */
+			break;
+	}	
+	mvprintw(20, 0, "You chose choice %d with choice string %s\n", choice, choices[choice - 1]);
+	clrtoeol();
+	refresh();
+	getch();
+	endwin();
+	return 0;
+}
+
+
+void print_menu(WINDOW *menu_win, int highlight)
 {
-    WINDOW *main_win;
-    int ch, row, col;       //declare ch
-    int startx, starty, width, height;
-    initscr();              //initialize curses
-    getmaxyx(stdscr,row,col);
-    raw();                  //line buffering disabled
-    keypad(stdscr, TRUE);   //F1, F2, etc activated
-    noecho();
-    if(has_colors()== FALSE)
-    {   endwin();
-        printf("Your Terminal does not support color\n");
-        exit(1);
-    }
-    start_color();
-    init_pair(1, COLOR_RED, COLOR_BLACK);
+	int x, y, i;	
 
-    height = 10;
-    width = 50;
-    starty = (LINES - height) / 2;
-    startx = (COLS - width) / 2;
-
-    char intro[]="BBQ System Tweak Tool\n";
-    char opt1[]="BBQ CPU";
-    char opt2[]="Selection2";
-    char opt3[]="Whatever";
-    char opt4[]="Junk";
-    char key_exit[]="Press F12 to exit";
-    char help[]="Press F1 for  Help";
-    int centered = (col-strlen(intro))/2;
-    int left_third = (col-strlen(opt1))/3;
-    int right_third = (col-strlen(opt2))/1.5;
-
-    attron(A_BOLD);
-    attron(COLOR_PAIR(1));
-    mvprintw(0,centered, "%s",intro); 
-    attroff(COLOR_PAIR(1));
-    attroff(A_BOLD);
-    mvprintw(2,left_third, "%s",opt1);
-    mvprintw(2,right_third, "%s", opt2);
-    mvprintw(3,left_third, "%s", opt3);
-    mvprintw(3,right_third, "%s", opt4);
-    mvprintw(7,centered, "%s", key_exit);
-    mvprintw(6,centered, "%s", help);
-    ch = getch();   //this is why we call raw(), to not have
-                    //have to press "return" after every 
-                    //keypress
-    if(ch == KEY_F(12)){
-        endwin();
-        printf("Happy Roasting\n");
-        exit(1);
-    }
-    else if(ch == KEY_F(1)){
-        mvprintw(8,0,"This is where I'll put some help");
-    }
-    //obviously need to spawn some windows and add logic
-    else{
-        mvprintw(8,0,"we'll echo our choices here\n");
-        attron(A_BOLD);
-        printw("%c", ch);
-        attroff(A_BOLD);
-    }
-    refresh();
-    getch();
-    while((ch =getch()) != KEY_F(12))
-    {{//switch(ch)
-       // {   case KEY(1):
-        getch();
-         }}
-    endwin();
-
-    return 0;
+	x = 2;
+	y = 2;
+	box(menu_win, 0, 0);
+	for(i = 0; i < n_choices; ++i)
+	{	if(highlight == i + 1) /* High light the present choice */
+		{	wattron(menu_win, A_REVERSE); 
+			mvwprintw(menu_win, y, x, "%s", choices[i]);
+			wattroff(menu_win, A_REVERSE);
+		}
+		else
+			mvwprintw(menu_win, y, x, "%s", choices[i]);
+		++y;
+	}
+	wrefresh(menu_win);
 }
