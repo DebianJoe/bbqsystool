@@ -10,8 +10,8 @@ int starty = 0;
 int alpha = 1;
 
 char *choices[] = { 
-			"BBQ CPU",
-			"BBQ WTF",
+			"BBQ ACPI-CPU",
+			"BBQ CPU Modules",
 			"BBQ Mem",
 			"BBQ Screen",
 			"Exit",
@@ -62,7 +62,7 @@ int main()
 					choice = highlight;
 					break;
 				default:
-					mvprintw(24, 0, "Charcter pressed is = %3d Hopefully it can be printed as '%c'", c, c);
+					mvprintw(15, 0, "Please Choose an option.");
 					refresh();
 					break;
 			}
@@ -80,23 +80,41 @@ int main()
 			int mode;
 			def_prog_mode();
 			endwin();
-			printf("\033[1;33mThis is where the CPU choices will go.\033[1;m\n");
-			printf("Press a number to go set value and go to menu.");			
+			printf("\033[2J\033[1;H");
+			printf("\033[1;33mGoverning Settings for acpi-cpufreq.\033[1;m\n");
+			printf("Press a number to go set value and go to menu.\n");
+			printf("\033[1;31m1).\033[1;mConservative.\n");
+			printf("\033[1;31m2).\033[1;mPowersave.\n");
+			printf("\033[1;31m3).\033[1;mOnDemand.\n");
+			printf("\033[1;31m4).\033[1;mPerformance.\n");
 			scanf("%d", &mode);
-			printf("You chose %d\n", mode);
+			if(mode == 1){
+				system("echo 'Conservative chosen'");
+			}
+			else if(mode == 2){
+				system("echo 'Powersave chosen'");
+			}
+			else if(mode == 3){
+				system("echo 'OnDemand Chosen'");
+			}
+			else if(mode == 4){
+				system("echo 'Performance Chosen'");
+			}
+			else{
+				printf("no valid choice made");
+			}
 			getch();
 			reset_prog_mode();
 			refresh();
 			choice = 0;
 		}
-		else if(choice == 2){ //BBQ 2nd Routine
+		else if(choice == 2){ //BBQ List kernel modules 
 			int mode;
 			def_prog_mode();
 			endwin();
-			printf("\033[1;33mThis is where the 2nd set of choices will go.\033[1;m\n");
-			printf("Press a number to go set value and go to menu.");
-			scanf("%d", &mode);
-			printf("You chose %d\n", mode);
+			printf("\033[2J\033[1;H");
+			printf("\033[1;33mAvailable Kernel Modules on Your System.\033[1;m\n");
+			system("ls /lib/modules/$(uname -r)/kernel/drivers/cpufreq/");
 			getch();
 			reset_prog_mode();
 			refresh();
