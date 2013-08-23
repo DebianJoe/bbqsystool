@@ -11,6 +11,7 @@ You should have received a copy of the GNU General Public License along with thi
 #include <stdio.h>
 #include <ncurses.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define WIDTH 30
 #define HEIGHT 10 
@@ -88,30 +89,38 @@ int main()
 			exit(1);
 		}
 		else if(choice == 1){ //BBQ CPU Routine
-			int mode;
+			int fmode, numCPU, dec;
 			def_prog_mode();
 			endwin();
 			printf("\033[2J\033[1;H");
 			printf("\033[1;33mGoverning Settings for acpi-cpufreq.\033[1;m\n");
 			printf("Press a number to go set value and go to menu.\n");
 			printf("\033[1;31m1).\033[1;mConservative.\n");
-			printf("\033[1;31m2).\033[1;mPowersave.\n");
-			printf("\033[1;31m3).\033[1;mOnDemand.\n");
+			printf("\033[1;31m2).\033[1;mPowerSave.\n");
+			printf("\033[1;31m3).\033[1;mOn Demand\n");
 			printf("\033[1;31m4).\033[1;mPerformance.\n");
-			scanf("%d", &mode);
-			if(mode == 1){
-				printf("Conservative chosen\n");
+			numCPU = sysconf( _SC_NPROCESSORS_ONLN );
+			printf("You have %d CPU\n"), numCPU;
+			scanf("%d", &fmode);
+			/* This function needs to be reduced to a simple iterating loop, with
+			 * a character array for the above choices.*/
+			if(fmode == 1){
+				//for(dec=numCPU;dec>0;--dec){
+					printf("Conservative chosen\n");
+					//printf("%d\n", dec-1);
+					//system("echo 'CPU %d activated'", dec-1);
+				//}
 				system("sudo cpufreq-set -g conservative");//needs looped through CPUs
 			}
-			else if(mode == 2){
+			else if(fmode == 2){
 				printf("Powersave chosen\n");
 				system("sudo cpufreq-set -g powersave");//needs loop
 			}
-			else if(mode == 3){
+			else if(fmode == 3){
 				printf("On Demand chosen\n");
 				system("sudo cpufreq-set -g ondemand");//needs loop
 			}
-			else if(mode == 4){
+			else if(fmode == 4){
 				printf("Performance Chosen\n");
 				system("sudo cpufreq-set -g performance");//needs loop
 			}
