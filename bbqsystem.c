@@ -72,6 +72,7 @@ int main()
 		}	
 		if(choice == 5){	//clean exit, requires change if main menu has more items
 			endwin();
+			printf("\033[2J\033[1;H");
 			printf("\n\n\033[1;31mHappy roasting!\033[1;m\n\n");
 			alpha = 0;
 			exit(1);
@@ -89,19 +90,23 @@ int main()
 			printf("\033[1;31m4).\033[1;mPerformance.\n");
 			scanf("%d", &mode);
 			if(mode == 1){
-				system("echo 'Conservative chosen'");
+				printf("Conservative chosen\n");
+				system("sudo cpufreq-set -g conservative");//needs looped through CPUs
 			}
 			else if(mode == 2){
-				system("echo 'Powersave chosen'");
+				printf("Powersave chosen\n");
+				system("sudo cpufreq-set -g powersave");//needs loop
 			}
 			else if(mode == 3){
-				system("echo 'OnDemand Chosen'");
+				printf("On Demand chosen\n");
+				system("sudo cpufreq-set -g ondemand");//needs loop
 			}
 			else if(mode == 4){
-				system("echo 'Performance Chosen'");
+				printf("Performance Chosen\n");
+				system("sudo cpufreq-set -g performance");//needs loop
 			}
 			else{
-				printf("no valid choice made");
+				printf("\033[1;31m...no valid choice made!\033[1;m");
 			}
 			getch();
 			reset_prog_mode();
