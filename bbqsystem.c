@@ -13,7 +13,7 @@ char *choices[] = {
 			"BBQ ACPI-CPU",
 			"BBQ CPU Modules",
 			"BBQ Mem",
-			"BBQ Screen",
+			"CPU Info",
 			"Exit",
 		  };
 int n_choices = sizeof(choices) / sizeof(char *);
@@ -136,14 +136,14 @@ int main()
 			reset_prog_mode();
 			refresh();
 		}
-		else if(choice == 4){ //BBQ 4th Routine
+		else if(choice == 4){ //BBQ System Frequency information
 			int mode;
 			def_prog_mode();
 			endwin();
-			printf("\033[1;33mThis is where the 4th set of choices will go.\033[1;m\n");
-			printf("Press a number to go set value and go to menu.");
-			scanf("%d", &mode);
-			printf("You chose %d\n", mode);
+			printf("\033[1;33mCpufreq Info\033[1;m\n");
+			system("cpufreq-info");
+			//scanf("%d", &mode);
+			//printf("You chose %d\n", mode);
 			getch();
 			reset_prog_mode();
 			refresh();
