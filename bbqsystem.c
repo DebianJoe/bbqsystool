@@ -23,7 +23,7 @@ int alpha = 1;
 char *choices[] = { 
 			"BBQ ACPI-CPU",
 			"BBQ CPU Modules",
-			"BBQ Mem",
+			"Expert Mode",
 			"CPU Info",
 			"Exit",
 		  };
@@ -101,8 +101,6 @@ int main()
 			printf("\033[1;31m4).\033[1;mPerformance.\n");
 			numCPU = sysconf( _SC_NPROCESSORS_ONLN );
 			scanf("%d", &fmode);
-			/* This function needs to be reduced to a simple iterating loop, with
-			 * a character array for the above choices.*/
 			if(fmode == 1){
 				printf("\033[1;32mConservative chosen\033[1;m\n");
 				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo conservative > $cpu; done");
@@ -138,26 +136,26 @@ int main()
 			reset_prog_mode();
 			refresh();
 		}
-		else if(choice == 3){ //BBQ 3rd Routine
+		else if(choice == 3){ //BBQ Expert Mode
 			int mode;
 			def_prog_mode();
 			endwin();
-			printf("\033[1;33mThis is where the 3rd set of choices will go.\033[1;m\n");
-			printf("Press a number to go set value and go to menu.");
-			scanf("%d", &mode);
-			printf("You chose %d\n", mode);
-			getch();
+			printf("\033[2J\033[1;H");			
+			printf("\033[1;33mVerbose Expert Mode\033[1;m\n");
+			printf("NOT COMPLETE YET.");
+			printf("Type '\033[1;32mexit\033[1;m' to return to scripted mode\n");
+			//scanf("%d", &mode);
+			//printf("You chose %d\n", mode);
+			system("/bin/bash");
 			reset_prog_mode();
 			refresh();
 		}
 		else if(choice == 4){ //BBQ System Frequency information
-			int mode;
+			//int mode;
 			def_prog_mode();
 			endwin();
 			printf("\033[1;33mCpufreq Info\033[1;m\n");
 			system("cpufreq-info");
-			//scanf("%d", &mode);
-			//printf("You chose %d\n", mode);
 			getch();
 			reset_prog_mode();
 			refresh();
