@@ -100,29 +100,24 @@ int main()
 			printf("\033[1;31m3).\033[1;mOn Demand\n");
 			printf("\033[1;31m4).\033[1;mPerformance.\n");
 			numCPU = sysconf( _SC_NPROCESSORS_ONLN );
-			printf("You have %d CPU\n"), numCPU;
 			scanf("%d", &fmode);
 			/* This function needs to be reduced to a simple iterating loop, with
 			 * a character array for the above choices.*/
 			if(fmode == 1){
-				//for(dec=numCPU;dec>0;--dec){
-					printf("Conservative chosen\n");
-					//printf("%d\n", dec-1);
-					//system("echo 'CPU %d activated'", dec-1);
-				//}
-				system("sudo cpufreq-set -g conservative");//needs looped through CPUs
+				printf("\033[1;32mConservative chosen\033[1;m\n");
+				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo conservative > $cpu; done");
 			}
 			else if(fmode == 2){
-				printf("Powersave chosen\n");
-				system("sudo cpufreq-set -g powersave");//needs loop
+				printf("\033[1;32mPowersave chosen\033[1;m\n");
+				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo powersave > $cpu; done");
 			}
 			else if(fmode == 3){
-				printf("On Demand chosen\n");
-				system("sudo cpufreq-set -g ondemand");//needs loop
+				printf("\033[1;32mOn Demand chosen\033[1;m\n");
+				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo ondemand > $cpu; done");
 			}
 			else if(fmode == 4){
-				printf("Performance Chosen\n");
-				system("sudo cpufreq-set -g performance");//needs loop
+				printf("\033[1;32mPerformance Chosen\033[1;m\n");
+				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo performance > $cpu; done");
 			}
 			else{
 				printf("\033[1;31m...no valid choice made!\033[1;m");
