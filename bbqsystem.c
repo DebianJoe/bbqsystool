@@ -23,8 +23,9 @@ int alpha = 1;
 char *choices[] = { 
 			"BBQ ACPI-CPU",
 			"BBQ CPU Modules",
-			"Expert Mode",
+			"Tutor Mode",
 			"CPU Info",
+			"Create Detailed Info File",
 			"Exit",
 		  };
 int n_choices = sizeof(choices) / sizeof(char *);
@@ -81,7 +82,7 @@ int main()
 			if(choice != 0)	/* User did a choice come out of the infinite loop */
 				break;
 		}	
-		if(choice == 5){	//clean exit, requires change if main menu has more items
+		if(choice == 6){	//clean exit, requires change if main menu has more items
 			endwin();
 			printf("\033[2J\033[1;H");
 			printf("\n\n\033[1;31mHappy roasting!\033[1;m\n\n");
@@ -116,6 +117,12 @@ int main()
 			else if(fmode == 4){
 				printf("\033[1;32mPerformance Chosen\033[1;m\n");
 				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo performance > $cpu; done");
+			}
+			else if(fmode ==5){
+				//These are just notes on what I am going to do later. :)
+				//system("touch ~/detailed_cpu_info");
+				//system("cat /proc/*info > ~/detailed_cpu_info");
+				//system("cat /proc/mounts >> ~/detailed_cpu_info");
 			}
 			else{
 				printf("\033[1;31m...no valid choice made!\033[1;m");
@@ -162,11 +169,12 @@ int main()
 			printf("You can ATTEMPT to ignore BIOS settings for CPU max value\n");
 			printf("by setting the value in /sys/module/processors/parameters/ignore_ppc\n");
 			printf("from 0 to 1.  This is a temporary option.\n\n");
-			printf("For a permanent change, append \033[1;32mprocessor.ignore_ppc=1\033[1;m\n to the kernel boot line\n");
-			printf("or create a file \033[1;32m/etc/modprobe.d/ignore_ppc.conf\033[1;m with the following in it.\n");
-			printf("\t\033[1;34moption processor ignore_ppc=1\n\033[1;m");
-			printf("this is potentially damaging so use with caution.\n");
+			printf("For a permanent change, append \033[1;32mprocessor.ignore_ppc=1\033[1;m to the kernel boot line, or:\n\n");
+			printf("\033[1;34mtouch /etc/modprobe.d/ignore_ppc.conf\033[1;m\n");
+			printf("\033[1;34mecho 'option processor ignore_ppc=1' > /etc/modprobe.d/ignore_ppc.conf\n\n\033[1;m");
+			printf("this option is potentially damaging so use with caution.\n");
 			system("/bin/bash");
+			printf("\033[2J\033[1;H");
 			reset_prog_mode();
 			refresh();
 		}
