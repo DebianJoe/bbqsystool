@@ -5,7 +5,7 @@ A System Tool in ncurses for LinuxBBQ
 
 Requires root permissions to run.
 
-Depends on libncurses.
+Depends on libncurses 5.9+20...so as new as possible is a good idea.
 
 ==========
 Under HEAVY construction.  Thus, there is no included makefile because I don't want someone to come along and think it's done.  If you wish to test it out, then it's very simple.  Download source, unpack it, navigate to the bbqsystool directory.  Use "gcc bbqsystem.c -lncurses" to create a binary for your system.  Then execute it with "sudo ./a.out", or log in as root and run the created binary.
