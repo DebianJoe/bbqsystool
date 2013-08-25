@@ -154,6 +154,7 @@ int main()
 			//int mode;
 			def_prog_mode();
 			endwin();
+			printf("\033[2J\033[1;H");
 			printf("\033[1;33mCpufreq Info\033[1;m\n");
 			system("cpufreq-info");
 			getch();
