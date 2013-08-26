@@ -103,27 +103,25 @@ int main()
 			printf("\033[1;31m5).\033[1;mKeep Current.\n");
 			numCPU = sysconf( _SC_NPROCESSORS_ONLN );
 			scanf("%d", &fmode);
-			if(fmode == 1){
-				printf("\033[1;32mConservative chosen\033[1;m\n");
-				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo conservative > $cpu; done");
-			}
-			else if(fmode == 2){
-				printf("\033[1;32mPowersave chosen\033[1;m\n");
-				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo powersave > $cpu; done");
-			}
-			else if(fmode == 3){
-				printf("\033[1;32mOn Demand chosen\033[1;m\n");
-				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo ondemand > $cpu; done");
-			}
-			else if(fmode == 4){
-				printf("\033[1;32mPerformance Chosen\033[1;m\n");
-				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo performance > $cpu; done");
-			}
-			else if(fmode ==5){
-				printf("\033[1;32mNothing Changed\033[1;m\n");
-			}
-			else{
-				printf("\033[1;31m...no valid choice made!\033[1;m");
+			switch(fmode){
+				case '1':
+					printf("\033[1;32mConservative chosen\033[1;m\n");
+					system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo conservative > $cpu; done");
+					break;
+				case '2':
+					printf("\033[1;32mPowersave chosen\033[1;m\n");
+					system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo powersave > $cpu; done");
+					break;
+				case '3':
+					printf("\033[1;32mOn Demand chosen\033[1;m\n");
+					system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo ondemand > $cpu; done");
+					break;
+				case '4':
+					printf("\033[1;32mPerformance Chosen\033[1;m\n");
+					system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo performance > $cpu; done");
+					break;
+				default:
+					printf("\033[1;32mNothing Changed\033[1;m\n");
 			}
 			getch();
 			reset_prog_mode();
