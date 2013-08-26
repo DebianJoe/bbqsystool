@@ -187,6 +187,10 @@ int main()
 			reset_prog_mode();
 			refresh();
 		}
+		else if(choice == 5){
+			system("cat /proc/*info > ~/detailed_cpu_file");
+			system("cat /proc/mounts >> ~/detailed_cpu_file");
+		}
 		clrtoeol();
 		refresh();
 	}
