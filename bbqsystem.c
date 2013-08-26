@@ -141,14 +141,20 @@ int main()
 			reset_prog_mode();
 			refresh();
 		}
-		else if(choice == 3){ //BBQ Expert Mode
+		else if(choice == 3){ //BBQ Tutor Mode
 			int mode;
 			def_prog_mode();
 			endwin();
 			printf("\033[2J\033[1;H");			
 			printf("\033[1;33m\tVerbose Expert Mode\033[1;m\n");
-			printf("NOT COMPLETE YET.");
-			printf("Type '\033[1;32mexit\033[1;m' at any time to return to scripted mode\n\n");
+			printf("At the BBQ, it is believed that it's better\n");
+			printf("to teach a man to fish than to simply give \n");
+			printf("them the fish.\n\n");
+			printf("This mode is designed to walk the user through.\n");
+			printf("performing CPU kernel adjustments from command line.\n\033[1;33m{press RETURN to continue}\033[1;m\n");
+			getch();
+			printf("\033[2J\033[1;H");
+			printf("Type '\033[1;32mexit\033[1;m' at any time to exit the shell\nand return to scripted mode\n\n");
 			printf("To load a specific loadable kernel module, type in\n\033[1;31m");
 			printf("\tmodprobe \033[1;32mmodule_name\033[1;m\n");
 			printf("To remove a specific loadable kernel module, type in\n\033[1;31m");
@@ -173,6 +179,10 @@ int main()
 			printf("this option is potentially damaging so use with caution.\n");
 			system("/bin/bash");
 			printf("\033[2J\033[1;H");
+			printf("To read the generated files regarding your system's configuration use\n");
+			printf("\033[1;34mcat /proc/*info\ncat /proc/mounts\nvmstat\nvmstat -m\033[1;m\n");
+			printf("use '\033[1;34mman vmstat\033[1;m' for more details.\n");
+			system("/bin/bash");
 			reset_prog_mode();
 			refresh();
 		}
