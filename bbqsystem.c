@@ -100,6 +100,7 @@ int main()
 			printf("\033[1;31m2).\033[1;mPowerSave.\n");
 			printf("\033[1;31m3).\033[1;mOn Demand\n");
 			printf("\033[1;31m4).\033[1;mPerformance.\n");
+			printf("\033[1;31m5).\033[1;mKeep Current.\n");
 			numCPU = sysconf( _SC_NPROCESSORS_ONLN );
 			scanf("%d", &fmode);
 			if(fmode == 1){
@@ -119,10 +120,7 @@ int main()
 				system("for cpu in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do echo performance > $cpu; done");
 			}
 			else if(fmode ==5){
-				//These are just notes on what I am going to do later. :)
-				//system("touch ~/detailed_cpu_info");
-				//system("cat /proc/*info > ~/detailed_cpu_info");
-				//system("cat /proc/mounts >> ~/detailed_cpu_info");
+				printf("\033[1;32mNothing Changed\033[1;m\n");
 			}
 			else{
 				printf("\033[1;31m...no valid choice made!\033[1;m");
