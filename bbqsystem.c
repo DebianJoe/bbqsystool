@@ -11,7 +11,6 @@ You should have received a copy of the GNU General Public License along with thi
 #include <stdio.h>
 #include <ncurses.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 #define WIDTH 30
 #define HEIGHT 10 
@@ -90,7 +89,7 @@ int main()
 			exit(1);
 		}
 		else if(choice == 1){ //BBQ CPU Routine
-			int fmode, numCPU, dec;
+			int fmode;
 			def_prog_mode();
 			endwin();
 			printf("\033[2J\033[1;H");
@@ -101,7 +100,6 @@ int main()
 			printf("\033[1;31m3).\033[1;mOn Demand\n");
 			printf("\033[1;31m4).\033[1;mPerformance.\n");
 			printf("\033[1;31m5).\033[1;mKeep Current.\n");
-			numCPU = sysconf( _SC_NPROCESSORS_ONLN );
 			scanf("%d", &fmode);
 			switch(fmode){
 				case '1':
@@ -129,7 +127,6 @@ int main()
 			choice = 0;
 		}
 		else if(choice == 2){ //BBQ List kernel modules 
-			int mode;
 			def_prog_mode();
 			endwin();
 			printf("\033[2J\033[1;H");
@@ -140,7 +137,6 @@ int main()
 			refresh();
 		}
 		else if(choice == 3){ //BBQ Tutor Mode
-			int mode;
 			def_prog_mode();
 			endwin();
 			printf("\033[2J\033[1;H");			
