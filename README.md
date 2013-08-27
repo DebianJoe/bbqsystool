@@ -14,13 +14,18 @@ This is the development branch for the LinuxBBQ CPU System Tool.
 Installation:
 ==========
 After downloading the source, cd into the newly created directory.  Then simply 
-'''
+
+```
 make 
-'''
-and with root permission 
-'''
+
+```
+
+and with root permission
+
+```
 make install
-'''  
+
+```  
 
 The newly created binary will be located in /usr/bin by default.  Hack up the Makefile if you don't like it.  The progam is provided "as-is" and devoid of warranty.  
 
