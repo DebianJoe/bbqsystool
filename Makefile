@@ -7,4 +7,4 @@ install:
 	mv bbqsystem /usr/bin/bbqsystem
 
 clean:
-	rm bbqsystem
+	rm /usr/bin/bbqsystem
