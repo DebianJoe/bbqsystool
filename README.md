@@ -3,12 +3,26 @@ bbqsystool
 
 A System Tool in ncurses for LinuxBBQ
 
-Requires root permissions to run.
+Requires root permissions to run, some features are available without it...but the control over governing will require root permission.
 
 Depends on libncurses 5.9+20...so as new as possible is a good idea.
 
+Note:
 ==========
-Under HEAVY construction.  Thus, there is no included makefile because I don't want someone to come along and think it's done.  If you wish to test it out, then it's very simple.  Download source, unpack it, navigate to the bbqsystool directory.  Use "gcc bbqsystem.c -lncurses" to create a binary for your system.  Then execute it with "sudo ./a.out", or log in as root and run the created binary.
+This is the development branch for the LinuxBBQ CPU System Tool.
+
+Installation:
+==========
+After downloading the source, cd into the newly created directory.  Then simply 
+'''
+make 
+'''
+and with root permission 
+'''
+make install
+'''  
+
+The newly created binary will be located in /usr/bin by default.  Hack up the Makefile if you don't like it.  The progam is provided "as-is" and devoid of warranty.  
 
 If I have to explain to you why it might not be totally safe to run a tool that is under construction that allows the root user to adjust CPU frequency and thresholds from userspace, then I believe that you deserve whatever happens.  Assuming that you simply wish to help test or troubleshoot the sections that are being worked on, then put in a pull-request with fixes or open an issue to discuss.
 
