@@ -131,7 +131,7 @@ int main()
 			def_prog_mode();
 			endwin();
 			printf("\033[2J\033[1;H");
-			printf("\033[1;33mAvailable Kernel Modules on Your System.\033[1;m\n");
+			printf("\033[1;33mAvailable CPU  Kernel Modules on Your System.\033[1;m\n");
 			system("ls /lib/modules/$(uname -r)/kernel/drivers/cpufreq/");
 			getch();
 			reset_prog_mode();
