@@ -10,6 +10,8 @@ Depends on libncurses 5.9+20...so as new as possible is a good idea.
 Note:
 ==========
 This is the development branch for the LinuxBBQ CPU System Tool.
+The htop option is simply a loader, and assumes you have alredy installed htop.
+
 
 Installation:
 ==========
