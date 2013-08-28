@@ -25,6 +25,7 @@ char *choices[] = {
 			"Tutor Mode",
 			"CPU Info",
 			"Create Detailed Info File",
+            "htop",
 			"Exit",
 		  };
 int n_choices = sizeof(choices) / sizeof(char *);
@@ -81,7 +82,7 @@ int main()
 			if(choice != 0)	/* User did a choice come out of the infinite loop */
 				break;
 		}	
-		if(choice == 6){	//clean exit, requires change if main menu has more items
+		if(choice == 7){	//clean exit, requires change if main menu has more items
 			endwin();
 			printf("\033[2J\033[1;H");
 			printf("\n\n\033[1;31mHappy roasting!\033[1;m\n\n");
@@ -177,6 +178,14 @@ int main()
 			printf("\033[1;34mcat /proc/*info\ncat /proc/mounts\nvmstat\nvmstat -m\033[1;m\n");
 			printf("use '\033[1;34mman vmstat\033[1;m' for more details.\n");
 			system("/bin/bash");
+			printf("\033[2J\033[1;H");
+			printf("\033[1;32mOld Kernel Removal (manual method)\033[1;m\n\n");
+			printf("To remove any kernel not being used still, use \n\033[1;34muname -r\033[1;m\nto check your current kernel.");
+			printf("  Then type in \n\033[1;34mdpkg --list | grep linux-image\033[1;m\n to list all installed kernel images.");
+			printf("  Then type in \n\033[1;34mdpkg --list | grep linux-headers\033[1;m\n to list all installed kernel headers.\n");
+			printf("You may then manually remove those that you aren't using, or use aptitude\n");
+			printf("to remove them.\n");
+			system("/bin/bash");
 			reset_prog_mode();
 			refresh();
 		}
@@ -195,6 +204,13 @@ int main()
 			system("cat /proc/*info > ~/detailed_cpu_file");
 			system("cat /proc/mounts >> ~/detailed_cpu_file");
 		}
+        else if(choice == 6) {
+            def_prog_mode();
+            endwin();
+            system("exec 'htop'");
+            reset_prog_mode();
+            refresh();
+        }
 		clrtoeol();
 		refresh();
 	}
