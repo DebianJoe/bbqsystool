@@ -35,6 +35,6 @@ If I have to explain to you why it might not be totally safe to run a tool that 
 
 Misc:
 ========
-Special thanks to Pidsley and Xaos52 for assistance with implementing awk into tutor mode.
+The "Create Detailed Info File" option will generate a file located in the user's home direcotory name 'detailed_cpu_file'.  Special thanks to Pidsley and Xaos52 for assistance with implementing awk into tutor mode.
 
 -joe
