@@ -13,13 +13,13 @@ You should have received a copy of the GNU General Public License along with thi
 #include <stdlib.h>
 
 #define WIDTH 30
-#define HEIGHT 10 
+#define HEIGHT 10
 
 int startx = 0;
 int starty = 0;
 int alpha = 1;
 
-char *choices[] = { 
+char *choices[] = {
 			"BBQ ACPI-CPU",
 			"BBQ CPU Modules",
 			"Tutor Mode",
@@ -32,7 +32,7 @@ int n_choices = sizeof(choices) / sizeof(char *);
 void print_menu(WINDOW *menu_win, int highlight);
 
 int main()
-{	
+{
 	while(alpha != 0){
 		WINDOW *menu_win;
 		int highlight = 1;
@@ -45,7 +45,7 @@ int main()
 		cbreak();	/* Line buffering disabled. pass on everything */
 		startx = (40 - WIDTH) / 2;
 		starty = (20 - HEIGHT) / 2;
-			
+
 		menu_win = newwin(HEIGHT, WIDTH, starty, startx);
 		keypad(menu_win, TRUE);
 		attron(A_BOLD);
@@ -67,7 +67,7 @@ int main()
 				case KEY_DOWN:
 					if(highlight == n_choices)
 						highlight = 1;
-					else 
+					else
 						++highlight;
 					break;
 				case 10:
@@ -81,7 +81,7 @@ int main()
 			print_menu(menu_win, highlight);
 			if(choice != 0)	/* User did a choice come out of the infinite loop */
 				break;
-		}	
+		}
 		if(choice == 7){	//clean exit, requires change if main menu has more items
 			endwin();
 			printf("\033[2J\033[1;H");
@@ -140,7 +140,7 @@ int main()
 		else if(choice == 3){ //BBQ Tutor Mode
 			def_prog_mode();
 			endwin();
-			printf("\033[2J\033[1;H");			
+			printf("\033[2J\033[1;H");
 			printf("\033[1;33m\tVerbose Expert Mode\033[1;m\n");
 			printf("At the BBQ, it is believed that it's better\n");
 			printf("to teach a man to fish than to simply give \n");
@@ -223,7 +223,7 @@ int main()
 
 void print_menu(WINDOW *menu_win, int highlight)
 {
-	int x, y, i;	
+	int x, y, i;
 
 	x = 2;
 	y = 2;
