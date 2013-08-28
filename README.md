@@ -33,4 +33,8 @@ The newly created binary will be located in /usr/bin by default.  Hack up the Ma
 
 If I have to explain to you why it might not be totally safe to run a tool that is under construction that allows the root user to adjust CPU frequency and thresholds from userspace, then I believe that you deserve whatever happens.  Assuming that you simply wish to help test or troubleshoot the sections that are being worked on, then put in a pull-request with fixes or open an issue to discuss.
 
+Misc:
+========
+Special thanks to Pidsley and Xaos52 for assistance with implementing awk into tutor mode.
+
 -joe

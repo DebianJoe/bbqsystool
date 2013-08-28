@@ -181,10 +181,12 @@ int main()
 			printf("\033[2J\033[1;H");
 			printf("\033[1;32mOld Kernel Removal (manual method)\033[1;m\n\n");
 			printf("To remove any kernel not being used still, use \n\033[1;34muname -r\033[1;m\nto check your current kernel.");
-			printf("  Then type in \n\033[1;34mdpkg --list | grep linux-image\033[1;m\n to list all installed kernel images.");
-			printf("  Then type in \n\033[1;34mdpkg --list | grep linux-headers\033[1;m\n to list all installed kernel headers.\n");
-			printf("You may then manually remove those that you aren't using, or use aptitude\n");
-			printf("to remove them.\n");
+			printf("  Then type in \n\033[1;34mdpkg --list | grep linux-image\033[1;m\n to list all installed kernel images.\n\n");
+			printf("To list ONLY the headers and image that you currently are NOT booted into.  Use:\n");
+			printf("\033[1;34mdpkg -l|awk '/^ii  linux-(im|he)/{print $2}'|grep -v $(uname -r)\033[1;m\n");
+			printf("If you are satisfied with the list, then you can remove them all with\n");
+			printf("\033[1;34msudo apt-get remove $(dpkg -l|awk '/^ii  linux-(im|he)/{print $2}'|grep -v $(uname -r))\033[1;m\n");
+			printf("Otherwise, you can remove individual kernel images/headers.\n");
 			system("/bin/bash");
 			reset_prog_mode();
 			refresh();
