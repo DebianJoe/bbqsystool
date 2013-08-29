@@ -192,7 +192,6 @@ int main()
 			refresh();
 		}
 		else if(choice == 4){ //BBQ System Frequency information
-			//int mode;
 			def_prog_mode();
 			endwin();
 			printf("\033[2J\033[1;H");
