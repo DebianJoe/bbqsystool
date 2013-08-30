@@ -7,6 +7,8 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.*/
 
+//TODO: PID/Pmap by pid tutorial
+
 
 #include <stdio.h>
 #include <ncurses.h>
@@ -148,6 +150,7 @@ int main()
 			printf("This mode is designed to walk the user through.\n");
 			printf("performing CPU kernel adjustments from command line.\n\033[1;33m{press RETURN to continue}\033[1;m\n");
 			getch();
+			//start Kernel Module loading section
 			printf("\033[2J\033[1;H");
 			printf("Type '\033[1;32mexit\033[1;m' at any time to exit the shell\nand return to scripted mode\n\n");
 			printf("To load a specific loadable kernel module, type in\n\033[1;31m");
@@ -158,12 +161,14 @@ int main()
 			printf("\t\033[1;31mlsmod\033[1;m\n");
 			printf("then type '\033[1;32mexit'\033[1;m to continue the script.\n\n");
 			system("/bin/bash");
+			//start max/min CPU freq section
 			printf("\033[2J\033[1;H");
 			printf("To set MAX clock frequency, use\n");
 			printf("\t\033[1;31mcpufreq-set -u \033[1;32m (your setting)\033[1;31mMHz or GHz\033[1;m\n\n");
 			printf("To set MIN clock frequency, use\033[1;31m\n");
 			printf("\tcpufreq-set -d \033[1;32m (your setting)\033[1;31mMhz or GHz\033[1;m\n\n");
 			system("/bin/bash");
+			//start BIOS override section
 			printf("\033[2J\033[1;H");
 			printf("You can ATTEMPT to ignore BIOS settings for CPU max value\n");
 			printf("by setting the value in /sys/module/processors/parameters/ignore_ppc\n");
@@ -173,11 +178,25 @@ int main()
 			printf("\033[1;34mecho 'option processor ignore_ppc=1' > /etc/modprobe.d/ignore_ppc.conf\n\n\033[1;m");
 			printf("this option is potentially damaging so use with caution.\n");
 			system("/bin/bash");
+			//start proc vmstat section
 			printf("\033[2J\033[1;H");
 			printf("To read the generated files regarding your system's configuration use\n");
 			printf("\033[1;34mcat /proc/*info\ncat /proc/mounts\nvmstat\nvmstat -m\033[1;m\n");
 			printf("use '\033[1;34mman vmstat\033[1;m' for more details.\n");
 			system("/bin/bash");
+			//start process ID pid/pmap section
+			printf("\033[2J\033[1;H");
+			printf("To display a diagram of running processes, type:\n");
+			printf("\033[1;34mpstree\033[1;m\n");
+			printf("To find the PID number for any of the processes:\n");
+			printf("\033[1;34mpidof \033[1;32m<the program>\033[1;m\n");
+			printf("\n*it is best to supply a full path if possible.\n");
+			printf("to avoid getting a symlink's process ID.\n\n");
+			printf("After getting the PID number, use:\n");
+			printf("\033[1;34mpmap -x \033[1;32m<PID_Number>\033[1;m");
+			printf("to get a full memory map of the process.\n");
+			system("/bin/bash");
+			//start Kernel Removal Section
 			printf("\033[2J\033[1;H");
 			printf("\033[1;32mOld Kernel Removal (manual method)\033[1;m\n\n");
 			printf("To remove any kernel not being used still, use \n\033[1;34muname -r\033[1;m\nto check your current kernel.");
