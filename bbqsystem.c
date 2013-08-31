@@ -39,7 +39,7 @@ int main()
 		WINDOW *menu_win;
 		int highlight = 1;
 		int choice = 0;
-		int c;
+		int c, row, col;
 
 		initscr();
 		clear();
@@ -58,6 +58,13 @@ int main()
 		refresh();
 		print_menu(menu_win, highlight);
 		while (choice == 0){
+			getmaxyx(stdscr, row, col);
+			if(row < 22 || col < 60){
+				endwin();
+				printf("\n\033[1;31mTerm must be at least 60 x 22\n\n\033[1;m");
+				alpha = 0;
+				exit(1);
+			}
 			c = wgetch(menu_win);
 			switch(c){
 				case KEY_UP:
